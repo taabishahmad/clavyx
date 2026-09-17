@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}History{% endblock %}
+{% block footer %}{% endblock %}
+{% block body %}
+<div class="shell">
+  {% include "partials/side.html" %}
+  <div class="main">
+    <div class="page-head"><div><h1>Your history</h1><p class="muted">Every argument you have stress tested.</p></div>
+      <a class="btn btn-primary" href="/analyze">New analysis</a></div>
+    {% if items %}
+    <table class="table">
+      <thead><tr><th>Argument</th><th>Robustness</th><th>Date</th><th></th></tr></thead>
+      <tbody>
+        {% for a in items %}
+        <tr>
+          <td><a href="/analysis/{{ a.id }}" style="font-weight:600">{{ a.title }}</a></td>
+          <td>{{ a.robustness }}%</td>
+          <td class="muted">{{ a.created_at.strftime('%d %b %Y') }}</td>
+          <td style="text-align:right">
+            <form method="post" action="/analysis/{{ a.id }}/delete" onsubmit="return confirm('Delete this analysis?')" style="display:inline">
+              <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="card card-pad center"><p class="muted">Nothing here yet.</p>
+      <a class="btn btn-primary" href="/analyze">Analyze your first argument</a></div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Pricing{% endblock %}
+{% block body %}
+<section class="section">
+  <div class="container">
+    <div class="center"><p class="eyebrow">Simple and fair</p><h1>Pricing</h1>
+      <p class="lead" style="margin:12px auto 40px">Start free. Upgrade when CLAVYX becomes part of how you think.</p></div>
+    <div class="grid grid-3">
+      <div class="card card-pad"><span class="pill pill-stone">Free</span><h2 style="margin:10px 0">$0</h2>
+        <p class="muted">For students and the curious.</p><hr class="divider" style="margin:16px 0">
+        <ul style="list-style:none;padding:0;display:grid;gap:10px;color:var(--ink-soft)">
+          <li>Up to 20 analyses a month</li><li>Foundations map and keystone</li><li>Stress test and evidence ledger</li><li>Saved history</li></ul>
+        <a class="btn btn-primary btn-block" style="margin-top:18px" href="/signup">Get started</a></div>
+      <div class="card card-pad" style="border-color:var(--accent); box-shadow:var(--shadow-lg)"><span class="pill">Pro</span><h2 style="margin:10px 0">$8<span style="font-size:1rem;color:var(--ink-faint)">/mo</span></h2>
+        <p class="muted">For writers, founders, and debaters.</p><hr class="divider" style="margin:16px 0">
+        <ul style="list-style:none;padding:0;display:grid;gap:10px;color:var(--ink-soft)">
+          <li>Unlimited analyses</li><li>Higher quality model</li><li>Export and share</li><li>Priority processing</li></ul>
+        <a class="btn btn-primary btn-block" style="margin-top:18px" href="/signup">Start Pro</a></div>
+      <div class="card card-pad"><span class="pill pill-brass">Campus</span><h2 style="margin:10px 0">Custom</h2>
+        <p class="muted">For departments and teams.</p><hr class="divider" style="margin:16px 0">
+        <ul style="list-style:none;padding:0;display:grid;gap:10px;color:var(--ink-soft)">
+          <li>Seats for a whole class</li><li>Shared library</li><li>Admin controls</li><li>Research consent tools</li></ul>
+        <a class="btn btn-ghost btn-block" style="margin-top:18px" href="mailto:{{ settings.CONTACT_EMAIL }}">Contact us</a></div>
+    </div>
+    <p class="center muted" style="margin-top:24px; font-size:.85rem">This is a final year project. Pricing is shown to demonstrate the product experience.</p>
+  </div>
+</section>
+{% endblock %}

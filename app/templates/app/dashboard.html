@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block footer %}{% endblock %}
+{% block body %}
+<div class="shell">
+  {% include "partials/side.html" %}
+  <div class="main">
+    <div class="page-head"><div><h1>Welcome, {{ user.display_name.split(' ')[0] }}</h1>
+      <p class="muted">Test an idea, or revisit one you have already stress tested.</p></div>
+      <a class="btn btn-primary" href="/analyze">New analysis</a></div>
+    <div class="stat-row">
+      <div class="stat"><div class="n">{{ total }}</div><div class="l">Total analyses</div></div>
+      <div class="stat"><div class="n">{{ avg }}%</div><div class="l">Average robustness (estimate)</div></div>
+      <div class="stat"><div class="n" style="text-transform:capitalize">{{ provider }}</div><div class="l">AI engine in use</div></div>
+    </div>
+    <h3>Recent analyses</h3>
+    {% if recent %}
+      {% for a in recent %}
+      <div class="list-row"><div><div class="t">{{ a.title }}</div>
+        <div class="d">{{ a.created_at.strftime('%d %b %Y, %H:%M') }} · robustness {{ a.robustness }}%</div></div>
+        <a class="btn btn-ghost" href="/analysis/{{ a.id }}">Open</a></div>
+      {% endfor %}
+    {% else %}
+      <div class="card card-pad center" style="margin-top:10px"><p class="muted">You have not analysed anything yet.</p>
+        <a class="btn btn-primary" href="/analyze">Analyze your first argument</a></div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

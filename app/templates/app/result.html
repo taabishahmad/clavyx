@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}{{ analysis.title }}{% endblock %}
+{% block footer %}{% endblock %}
+{% set weights = {'high':45,'medium':22,'low':9} %}
+{% block body %}
+<div class="shell">
+  {% include "partials/side.html" %}
+  <div class="main" id="result-view">
+    <div class="page-head"><div><a href="/history" class="muted" style="font-size:.85rem">← Back to history</a>
+      <h1 style="margin-top:6px">{{ analysis.title }}</h1>
+      <p class="muted">{{ analysis.created_at.strftime('%d %b %Y, %H:%M') }} · engine: {{ result.engine }}</p></div>
+      <span class="pill">Robustness {{ result.robustness }}% (estimate)</span></div>
+
+    <div class="card card-pad" style="margin-bottom:22px"><span class="pill pill-stone">Your argument</span>
+      <p style="margin-top:10px">{{ analysis.input_text }}</p></div>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="0">Foundations</button>
+      <button class="tab" data-tab="1">Keystone</button>
+      <button class="tab" data-tab="2">Stress test</button>
+      <button class="tab" data-tab="3">Opposing case</button>
+      <button class="tab" data-tab="4">Weakest link</button>
+      <button class="tab" data-tab="5">Evidence</button>
+    </div>
+
+    <div class="panel active" data-panel="0">
+      <div class="map">
+        <div class="node concl">{{ result.conclusion }}</div>
+        <div class="stem"></div>
+        <div class="legs">
+          {% for a in result.assumptions %}
+          <div class="leg"><div class="node {{ 'key' if a.text in result.minimal_set }}">
+            {% if a.text in result.minimal_set %}<span class="badge medium">keystone</span><br>{% endif %}
+            {{ a.text }}
+            <div style="margin-top:8px"><span class="badge {{ a.influence }}">{{ a.influence }} influence</span></div>
+          </div></div>
+          {% endfor %}
+        </div>
+        <p class="estimate-note">Highlighted stones are the keystones: the assumptions the conclusion cannot stand without.</p>
+      </div>
+    </div>
+
+    <div class="panel" data-panel="1">
+      <div class="card card-pad"><span class="pill pill-brass">Minimal sufficient set</span>
+        <h3 style="margin-top:12px">The few assumptions your conclusion truly needs</h3>
+        <p class="muted">Remove any one of these and the conclusion loses its support.</p>
+        {% for m in result.minimal_set %}
+        <div class="assum"><div class="rk">key</div><div>{{ m }}</div></div>
+        {% else %}<p>No single keystone stood out for this argument.</p>{% endfor %}
+      </div>
+    </div>
+
+    <div class="panel" data-panel="2">
+      <div class="card card-pad"><h3>Stress test</h3>
+        <p class="muted">Turn an assumption off to see how much your conclusion leans on it.</p>
+        <div class="meter-wrap"><div class="meter"><span id="meter-fill" style="width:100%"></span></div>
+          <p style="margin-top:8px"><b>Estimated support: <span id="meter-val">100</span>%</b></p></div>
+        <div class="toggles">
+          {% for a in result.assumptions %}
+          <div class="toggle"><span>{{ a.text }} <span class="badge {{ a.influence }}">{{ a.influence }}</span></span>
+            <span class="switch" data-w="{{ weights[a.influence] }}">holds</span></div>
+          {% endfor %}
+        </div>
+        <p class="estimate-note">This support figure is a model estimate to make dependency tangible, not a measured probability.</p>
+      </div>
+    </div>
+
+    <div class="panel" data-panel="3">
+      <div class="card card-pad"><h3>The strongest fair opposing case</h3>
+        <p>{{ result.opposing_case }}</p>
+        <p class="muted" style="font-size:.85rem">A steelman, not a strawman.</p></div>
+    </div>
+
+    <div class="panel" data-panel="4">
+      <div class="card card-pad"><span class="pill">Most fragile step</span>
+        <h3 style="margin-top:12px">{{ result.weakest_link.text }}</h3>
+        <p>{{ result.weakest_link.why }}</p></div>
+    </div>
+
+    <div class="panel" data-panel="5">
+      <div class="card card-pad"><h3>Evidence ledger</h3>
+        <table class="ledger"><thead><tr><th>Assumption</th><th>Evidence that would settle it</th></tr></thead>
+        <tbody>{% for e in result.evidence %}<tr><td>{{ e.assumption }}</td><td>{{ e.evidence }}</td></tr>{% endfor %}</tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="/static/js/result.js"></script>{% endblock %}

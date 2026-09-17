@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Reset password{% endblock %}
+{% block footer %}{% endblock %}
+{% block body %}
+<div class="auth-wrap"><div class="auth-card">
+  <div class="auth-head"><h2>Reset your password</h2><p class="muted">Enter your email and we will create a reset link.</p></div>
+  {% include "partials/flash.html" %}
+  {% if dev_link %}
+    <div class="alert alert-info">Development mode: email is not sent. Use this link to reset:
+      <br><a href="{{ dev_link }}">{{ dev_link }}</a></div>
+  {% endif %}
+  <form method="post" action="/forgot">
+    <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+    <div class="field"><label>Email</label><input class="input" type="email" name="email" required></div>
+    <button class="btn btn-primary btn-block" type="submit">Send reset link</button>
+  </form>
+  <p class="auth-alt"><a href="/login">Back to sign in</a></p>
+</div></div>
+{% endblock %}

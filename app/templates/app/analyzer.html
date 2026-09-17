@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Analyze{% endblock %}
+{% block footer %}{% endblock %}
+{% block body %}
+<div class="shell">
+  {% include "partials/side.html" %}
+  <div class="main">
+    <div class="page-head"><div><h1>New analysis</h1>
+      <p class="muted">Paste an argument, a plan, or a paragraph of an essay. CLAVYX will find its keystone.</p></div></div>
+    <div class="analyzer-grid">
+      <form id="analyze-form">
+        <div class="field">
+          <label for="arg-input">Your argument</label>
+          <textarea id="arg-input" class="input" name="text" placeholder="For example: Remote work should be mandatory because employees are more productive at home..." style="min-height:180px"></textarea>
+          <div class="count" id="char-count">0 / 6000</div>
+        </div>
+        <div class="examples">
+          <button type="button" class="chip" data-example="Remote work should be mandatory because employees are more productive at home and companies save money on office space.">Remote work</button>
+          <button type="button" class="chip" data-example="We should ban homework in primary schools because it causes stress and there is no evidence it improves learning at that age.">Homework ban</button>
+          <button type="button" class="chip" data-example="Our startup should raise venture capital now because the market is hot and our competitors are all raising large rounds.">Raise funding</button>
+        </div>
+        <div style="margin-top:16px"><button id="analyze-btn" class="btn btn-primary btn-lg" type="submit">Find the keystone</button></div>
+        <div class="provider-note"><span class="dot {{ 'mock' if provider=='mock' }}"></span>
+          {% if provider=='mock' %}Running on the built in offline engine. Add an API key in .env for higher quality analysis.{% else %}Powered by the {{ provider }} model.{% endif %}</div>
+      </form>
+      <div id="result-area"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="/static/js/analyzer.js"></script>{% endblock %}

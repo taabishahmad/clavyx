@@ -1,0 +1,19 @@
+<aside class="side">
+  <div class="who">
+    <div class="avatar">{{ (user.display_name or 'U')[0]|upper }}</div>
+    <div><div style="font-weight:600;font-size:.92rem">{{ user.display_name }}</div>
+      <div class="muted" style="font-size:.78rem">{{ user.email }}</div></div>
+  </div>
+  <nav class="side-nav">
+    <a href="/dashboard" class="{{ 'active' if active=='dashboard' }}">Dashboard</a>
+    <a href="/analyze" class="{{ 'active' if active=='analyze' }}">New analysis</a>
+    <a href="/history" class="{{ 'active' if active=='history' }}">History</a>
+    <div class="grp">Account</div>
+    <a href="/settings" class="{{ 'active' if active=='settings' }}">Settings</a>
+    {% if user.role == 'admin' %}<a href="/admin" class="{{ 'active' if active=='admin' }}">Admin</a>{% endif %}
+    <form method="post" action="/logout" style="margin-top:6px">
+      <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+      <button class="side-nav" style="width:100%;text-align:left;background:none;border:0;cursor:pointer;color:var(--ink-soft);padding:.65em .8em;font:inherit">Sign out</button>
+    </form>
+  </nav>
+</aside>

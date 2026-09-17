@@ -1,0 +1,21 @@
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/"><img src="/static/logo.svg" alt=""> {{ settings.APP_NAME }}</a>
+    <button class="nav-toggle" aria-label="Menu">≡</button>
+    <div class="nav-links">
+      <a href="/how-it-works" class="{{ 'active' if active=='how' }}">How it works</a>
+      <a href="/learn" class="{{ 'active' if active=='learn' }}">Learn</a>
+      <a href="/pricing" class="{{ 'active' if active=='pricing' }}">Pricing</a>
+      <a href="/about" class="{{ 'active' if active=='about' }}">About</a>
+      {% if user %}<a href="/dashboard" class="{{ 'active' if active=='dashboard' }}">Dashboard</a>{% endif %}
+    </div>
+    <div class="nav-right">
+      {% if user %}
+        <a class="btn btn-primary" href="/analyze">New analysis</a>
+      {% else %}
+        <a class="btn btn-ghost" href="/login">Sign in</a>
+        <a class="btn btn-primary" href="/signup">Get started</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>

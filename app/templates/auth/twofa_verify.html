@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Two factor{% endblock %}
+{% block footer %}{% endblock %}
+{% block body %}
+<div class="auth-wrap"><div class="auth-card">
+  <div class="auth-head"><h2>Enter your code</h2><p class="muted">Open your authenticator app and enter the 6 digit code.</p></div>
+  {% include "partials/flash.html" %}
+  <form method="post" action="/2fa">
+    <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+    <div class="field"><label>Authentication code</label><input class="input mono" type="text" name="code" inputmode="numeric" autocomplete="one-time-code" required style="letter-spacing:.3em;text-align:center;font-size:1.3rem"></div>
+    <button class="btn btn-primary btn-block" type="submit">Verify</button>
+  </form>
+</div></div>
+{% endblock %}

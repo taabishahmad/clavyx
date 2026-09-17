@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block body %}
+<section class="section">
+  <div class="container" style="max-width:820px">
+    <p class="eyebrow">The story</p>
+    <h1>Why I built CLAVYX</h1>
+    <p class="lead">I am Tabish Ahmad, a final year Computer Science student at the International Islamic University, Islamabad. I build AI systems, and I kept noticing the same thing: the hardest part of thinking well is not finding arguments, it is seeing the ones you have already accepted without noticing.</p>
+    <p>Most assistants are agreeable. They help you build your case. CLAVYX does the opposite, on purpose. It shows you the hidden foundations under your own reasoning, finds the single stone the whole thing rests on, and gives you the strongest fair version of the other side. I wanted a tool that makes ideas stronger by testing them honestly, not one that just agrees with me.</p>
+    <p>CLAVYX is also my research project. Behind the friendly interface is a defined task, a small hand checked benchmark, and a measured comparison against plain prompting. The goal is a tool people enjoy and a result that stands up to review. My teammate Haris Bin Habib and I are building it under the supervision of Dr. Syed Saqlain.</p>
+    <div class="card card-pad" style="margin-top:28px">
+      <h3>Get in touch</h3>
+      <p class="muted">I am always happy to talk about reasoning, language models, and building things that matter.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+        <a class="btn btn-ghost" href="mailto:{{ settings.CONTACT_EMAIL }}">{{ settings.CONTACT_EMAIL }}</a>
+        <a class="btn btn-ghost" href="{{ settings.CONTACT_GITHUB }}">GitHub</a>
+        <a class="btn btn-ghost" href="{{ settings.CONTACT_LINKEDIN }}">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

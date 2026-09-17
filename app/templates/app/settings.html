@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+{% block footer %}{% endblock %}
+{% block body %}
+<div class="shell">
+  {% include "partials/side.html" %}
+  <div class="main" style="max-width:760px">
+    <div class="page-head"><div><h1>Settings</h1><p class="muted">Manage your profile and security.</p></div></div>
+    {% include "partials/flash.html" %}
+
+    <div class="card card-pad" style="margin-bottom:20px">
+      <h3>Profile</h3>
+      <form method="post" action="/settings/profile">
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        <div class="field"><label>Name</label><input class="input" name="display_name" value="{{ user.display_name }}" required></div>
+        <div class="field"><label>Email</label><input class="input" value="{{ user.email }}" disabled></div>
+        <button class="btn btn-primary" type="submit">Save profile</button>
+      </form>
+    </div>
+
+    <div class="card card-pad" style="margin-bottom:20px">
+      <h3>Change password</h3>
+      <form method="post" action="/settings/password">
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        <div class="field"><label>Current password</label><input class="input" type="password" name="current" required></div>
+        <div class="field"><label>New password</label>
+          <input class="input" type="password" name="new" required data-strength="#pw2">
+          <div class="strength" id="pw2"><span></span></div></div>
+        <button class="btn btn-primary" type="submit">Update password</button>
+      </form>
+    </div>
+
+    <div class="card card-pad" style="margin-bottom:20px">
+      <h3>Two factor authentication</h3>
+      {% if user.twofa_enabled %}
+        <p class="muted">Two factor authentication is <b>on</b>. You will be asked for a code when you sign in.</p>
+        <form method="post" action="/settings/2fa/disable">
+          <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+          <button class="btn btn-danger" type="submit">Turn off</button>
+        </form>
+      {% elif twofa_secret %}
+        <p class="muted">Add this account to an authenticator app, then enter a code to confirm.</p>
+        <p class="kbd" style="display:inline-block;margin:6px 0">{{ twofa_secret }}</p>
+        <p class="hint" style="word-break:break-all">Setup link: {{ twofa_uri }}</p>
+        <form method="post" action="/settings/2fa/confirm" style="margin-top:10px">
+          <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+          <div class="field"><label>Code from your app</label><input class="input mono" name="code" required></div>
+          <button class="btn btn-primary" type="submit">Confirm and enable</button>
+        </form>
+      {% else %}
+        <p class="muted">Add a second layer of security with a code from an authenticator app.</p>
+        <form method="post" action="/settings/2fa/enable">
+          <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+          <button class="btn btn-brass" type="submit">Set up two factor</button>
+        </form>
+      {% endif %}
+    </div>
+
+    <div class="card card-pad" style="border-color:var(--accent-soft)">
+      <h3 style="color:var(--accent-deep)">Danger zone</h3>
+      <p class="muted">Deleting your account permanently removes your profile and every saved analysis.</p>
+      <form method="post" action="/settings/delete" onsubmit="return confirm('This permanently deletes your account and all analyses. Continue?')">
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        <button class="btn btn-danger" type="submit">Delete my account</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block footer %}{% endblock %}
+{% block body %}
+<div class="shell">
+  {% include "partials/side.html" %}
+  <div class="main">
+    <div class="page-head"><div><h1>Admin</h1><p class="muted">Platform overview.</p></div></div>
+    <div class="stat-row">
+      <div class="stat"><div class="n">{{ users|length }}</div><div class="l">Users</div></div>
+      <div class="stat"><div class="n">{{ total_analyses }}</div><div class="l">Total analyses</div></div>
+      <div class="stat"><div class="n">{{ avg }}%</div><div class="l">Average robustness</div></div>
+    </div>
+    <h3>Users</h3>
+    <table class="table">
+      <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>2FA</th><th>Joined</th></tr></thead>
+      <tbody>
+        {% for u in users %}
+        <tr><td style="font-weight:600">{{ u.display_name }}</td><td class="muted">{{ u.email }}</td>
+          <td><span class="badge {{ 'high' if u.role=='admin' else 'low' }}">{{ u.role }}</span></td>
+          <td>{{ 'on' if u.twofa_enabled else 'off' }}</td>
+          <td class="muted">{{ u.created_at.strftime('%d %b %Y') if u.created_at else '' }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Find the key your conclusion rests on{% endblock %}
+{% block body %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">Reasoning, stress tested</p>
+      <h1>Find the <span class="accent">key</span> your conclusion rests on.</h1>
+      <p class="lead">CLAVYX reads any argument, plan, or essay and shows the hidden assumptions it quietly stands on. It finds the one or two that carry the weight, lets you test what happens if they fail, and answers with the strongest fair case against you.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary btn-lg" href="{{ '/analyze' if user else '/signup' }}">Analyze an argument</a>
+        <a class="btn btn-ghost btn-lg" href="/how-it-works">See how it works</a>
+      </div>
+      <div class="trust">
+        <div><b>7</b> stage reasoning pipeline</div>
+        <div><b>1</b> keystone per argument</div>
+        <div><b>0</b> strawmen, ever</div>
+      </div>
+    </div>
+    <div class="hero-art img-holder">
+      <img src="/static/img/hero.png" alt="A stone arch with a glowing keystone" data-fallback>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="grid grid-3">
+      <div class="fcard"><div class="ic">A</div><h3>Excavate assumptions</h3><p class="muted">See the unstated beliefs your argument depends on, laid out as a clear map of foundations.</p></div>
+      <div class="fcard"><div class="ic">K</div><h3>Find the keystone</h3><p class="muted">The minimal set of assumptions the conclusion cannot survive without. Remove one, and it falls.</p></div>
+      <div class="fcard"><div class="ic">S</div><h3>Answer fairly</h3><p class="muted">The strongest honest opposing case, aimed at what actually matters, plus the evidence that would change your mind.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="feature">
+      <div>
+        <p class="feature-num">01</p>
+        <h3>A map of what holds your argument up</h3>
+        <p class="muted">Most tools help you make your case. CLAVYX shows you the skeleton underneath it: the conclusion, the reasons you gave, and the silent assumptions doing the real work.</p>
+      </div>
+      <div class="feature-art img-holder"><img src="/static/img/feature-foundations.png" alt="" data-fallback></div>
+    </div>
+    <div class="feature">
+      <div>
+        <p class="feature-num">02</p>
+        <h3>The one assumption that carries the weight</h3>
+        <p class="muted">Using an entailment based search, CLAVYX reduces your assumptions to the smallest set the conclusion genuinely needs. That is your keystone, and it is where you should spend your effort.</p>
+      </div>
+      <div class="feature-art img-holder"><img src="/static/img/feature-keystone.png" alt="" data-fallback></div>
+    </div>
+    <div class="feature">
+      <div>
+        <p class="feature-num">03</p>
+        <h3>Feel the argument bend</h3>
+        <p class="muted">Turn an assumption off and watch the support for your conclusion drop in real time. Fragility you can see is fragility you can fix.</p>
+      </div>
+      <div class="feature-art img-holder"><img src="/static/img/feature-stress.png" alt="" data-fallback></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="band">
+      <div><div class="n">Assumptions</div><div class="l">surfaced and ranked</div></div>
+      <div><div class="n">Keystone</div><div class="l">minimal sufficient set</div></div>
+      <div><div class="n">Steelman</div><div class="l">the fair opposing case</div></div>
+      <div><div class="n">Evidence</div><div class="l">what would change your mind</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section center">
+  <div class="container">
+    <h2>Stop convincing yourself. Start testing your ideas.</h2>
+    <p class="lead" style="margin:14px auto 26px">Paste an argument and see its hidden foundations in seconds.</p>
+    <a class="btn btn-primary btn-lg" href="{{ '/analyze' if user else '/signup' }}">Get started free</a>
+  </div>
+</section>
+{% endblock %}

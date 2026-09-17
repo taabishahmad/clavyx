@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Sign in{% endblock %}
+{% block footer %}{% endblock %}
+{% block body %}
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-head"><a class="brand" href="/" style="justify-content:center"><img src="/static/logo.svg" alt=""> {{ settings.APP_NAME }}</a>
+      <h2 style="margin-top:14px">Welcome back</h2><p class="muted">Sign in to keep testing your ideas.</p></div>
+    {% include "partials/flash.html" %}
+    <form method="post" action="/login">
+      <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+      <input type="hidden" name="next" value="{{ next or '/dashboard' }}">
+      <div class="field"><label>Email</label><input class="input" type="email" name="email" required autocomplete="email"></div>
+      <div class="field"><label>Password</label><input class="input" type="password" name="password" required autocomplete="current-password"></div>
+      <div class="field"><label class="checkbox"><input type="checkbox" name="remember" value="1"> Keep me signed in</label></div>
+      <button class="btn btn-primary btn-block btn-lg" type="submit">Sign in</button>
+    </form>
+    <p class="auth-alt"><a href="/forgot">Forgot your password?</a></p>
+    <p class="auth-alt">New here? <a href="/signup">Create an account</a></p>
+  </div>
+</div>
+{% endblock %}

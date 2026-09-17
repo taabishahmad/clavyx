@@ -1,0 +1,25 @@
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <a class="brand" href="/"><img src="/static/logo.svg" alt=""> {{ settings.APP_NAME }}</a>
+      <p style="margin-top:14px; color:#C9BBA0; max-width:34ch">{{ settings.TAGLINE }} A thinking partner that makes your ideas bulletproof.</p>
+    </div>
+    <div><h4>Product</h4><ul>
+      <li><a href="/how-it-works">How it works</a></li>
+      <li><a href="/analyze">Analyze</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li><a href="/learn">Learn</a></li>
+    </ul></div>
+    <div><h4>Company</h4><ul>
+      <li><a href="/about">About</a></li>
+      <li><a href="{{ settings.CONTACT_GITHUB }}">GitHub</a></li>
+      <li><a href="{{ settings.CONTACT_LINKEDIN }}">LinkedIn</a></li>
+      <li><a href="mailto:{{ settings.CONTACT_EMAIL }}">Contact</a></li>
+    </ul></div>
+    <div><h4>Legal</h4><ul>
+      <li><a href="/terms">Terms</a></li>
+      <li><a href="/privacy">Privacy</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">© {{ year }} {{ settings.APP_NAME }} · Built by Tabish Ahmad and Haris Bin Habib</div>
+</footer>

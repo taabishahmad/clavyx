@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf" content="{{ csrf_token }}">
+  <title>{% block title %}{{ settings.APP_NAME }}{% endblock %} · {{ settings.APP_NAME }}</title>
+  <meta name="description" content="CLAVYX finds the few load bearing assumptions your argument rests on, tests whether the conclusion survives when they change, and answers with the strongest fair opposing case.">
+  <link rel="icon" href="/static/logo.svg">
+  <link rel="stylesheet" href="/static/css/theme.css">
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body>
+  {% include "partials/nav.html" %}
+  <main>
+    {% block body %}{% endblock %}
+  </main>
+  {% block footer %}{% include "partials/footer.html" %}{% endblock %}
+  <script src="/static/js/main.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
