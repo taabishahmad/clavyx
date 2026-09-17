@@ -1,8 +1,5 @@
+venv/
 __pycache__/
 *.pyc
 .env
-clavyx.db
-.venv/
-venv/
-.DS_Store
-*.log
+data/
