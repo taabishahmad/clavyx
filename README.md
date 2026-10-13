@@ -126,7 +126,7 @@ The support figure in the stress test is a model estimate, shown to make depende
 ## Author
 
 **Tabish Ahmad** — final year Computer Science, International Islamic University, Islamabad.
-Built with **Haris Bin Habib**, supervised by **Dr. Syed Saqlain**.
+
 
 - Email: tabishahmad2021@gmail.com
 - GitHub: https://github.com/taabishahmad
